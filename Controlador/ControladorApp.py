@@ -1,4 +1,4 @@
-from Modelo.Connection import Connection
+from modelo.persistencia.Connection import Connection
 
 # Variables Conexion
 
