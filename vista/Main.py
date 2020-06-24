@@ -2,7 +2,7 @@ import sys
 
 from PyQt5.QtWidgets import QApplication
 
-from Vista.VistaApp import App
+from vista.VistaApp import App
 
 
 class Main(object):

@@ -16,7 +16,7 @@ URL = 'bolt://localhost:11005'
 USER = 'neo4j'
 PASSWORD = '123'
 myConect = Connection(URL, USER, PASSWORD)
-RUTA_FILES="D:/Workspaces/R-workspace/ClusteringR/ClustersGasto/"
+RUTA_FILES="../files/clusters/"
 
 def clientesPorCluster(file):
     """Este metodo lee los csv de los clusters y devuelve un diccionario con los clientes y el numero de compras que se ha realizado de las distintas familia"""

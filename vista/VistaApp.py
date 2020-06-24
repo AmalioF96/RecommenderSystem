@@ -1,11 +1,11 @@
 import sys
 
-from Controlador.ControladorApp import ControladorApp
+from controlador.ControladorApp import ControladorApp
 
 from PyQt5.QtWidgets import QMainWindow
 from PyQt5.QtCore import pyqtSlot
 
-from Vista.MyTableWidget import MyTableWidget
+from vista.MyTableWidget import MyTableWidget
 
 ventana = "";
 
