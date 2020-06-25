@@ -9,6 +9,8 @@ library(MASS)
 library(dplyr)
 library(corrplot)   #Para pintar matriz de correlacion
 
+require(ppclust)
+require(fclust)
 #Leemos los datos
 dataClienteFamilia <- read.csv("../files/similarityMatrix/dataGastoClienteFamilia.csv", row.names=1, na.strings="0")
 
@@ -39,16 +41,26 @@ fviz_nbclust(muestreo, kmeans,method = "gap_stat")
 
 #Seteamos la semilla
 set.seed(1996) # para reproducibilidad
+#Clustering Difuso
 numCluster=5
-clusters.km <- kmeans(clientefamPrep,numCluster,nstart = 25)
-clusters.km$size
-data_clus_1 <- clientefamPrep[clusters.km$cluster == 1,]
-data_clus_2 <- clientefamPrep[clusters.km$cluster == 2,]
-data_clus_3 <- clientefamPrep[clusters.km$cluster == 3,]
-
+#fanny(clientefamPrep, numCluster, metric = "euclidean", stand = FALSE) Es CMEANS? Preguntar MIGUEL
+res.fcm <- fcm(clientefamPrep, centers=5)
+summary(res.fcm)
+plotcluster(res.fcm, cp=1, trans=TRUE)
 
 
 fviz_cluster(clusters.km, data = clientefamPrep, palette = "jco", ggtheme = theme_minimal())
+
+res.fcm3 <- ppclust2(res.fcm, "fanny")
+cluster::clusplot(scale(clientefamPrep), res.fcm3$cluster,  
+                  main = "Cluster plot of Iris data set",
+                  color=TRUE, labels = 2, lines = 2, cex=1)
+
+
+
+
+
+
 
 
 ##### Sacar CSV con los id de usuarios por cluster #####
@@ -71,5 +83,5 @@ for (i in 1:2) {
 
 print("finish")
 
-#setwd("D:/Workspaces/eclipse-workspace/TFG/RecommenderSystem/r_resources")
+setwd("D:/Workspaces/eclipse-workspace/TFG/RecommenderSystem/r_resources")
 #getwd()
