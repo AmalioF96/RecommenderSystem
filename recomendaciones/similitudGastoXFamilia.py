@@ -50,7 +50,7 @@ def getGastoClientesFamilia():
 clientes = sum(getClientes().values.tolist(), [])
 familias = sum(getFamilias().values.tolist(), [])
 #2# - Formamos Matriz")        
-dfObj = pd.DataFrame(columns=familias, index=clientes)
+dfObj = pd.DataFrame(columns=familias, index=clientes) #Usamos el numero de clientes(filas) y el numero de familias(columnas) para formar la matriz
 
 print(dfObj)
 #3# - Recogemos getFacturasFamilia     
