@@ -36,6 +36,8 @@ def getFacturasFamilia():
     data = pd.DataFrame(myConect.consultar(query), columns=['fac', 'familia', 'similitud'])
     return data
 
+
+#FUNCION PARA SACAR UNA SIMILITUD SIMPLE, EL NUMERO DE VECES QUE UN CLIENTE COMPRA ARTICULOS DE UNA FAMILIA
 def getClientesFamilia():
     query="MATCH (c1:cliente)-[ra1:COMPRA]->(f1:factura)-[ra2:CONTIENE]->(a:articulo) where c1.id<>'1715' return c1.id as cliente,a.familia_id as familia, count(a.familia_id) as similitud order by cliente desc"
     data = pd.DataFrame(myConect.consultar(query), columns=['cliente', 'familia', 'similitud'])
@@ -50,8 +52,8 @@ def getArticulos():
 def getSimilitudFacturasCliente(id):
     query = "MATCH (c1:cliente {id:'" + id + "'})-[ra1:COMPRA]->(f1:factura)-[ra2:CONTIENE]->(a:articulo)<-[rb2:CONTIENE]-(f2:factura)<-[rb1:COMPRA]-(c1:cliente {id:'" + id + "'}) where f1.id<f2.id return f1.id as fac1, f2.id as fac2,count(a) as similitud order by similitud"
     data = pd.DataFrame(myConect.consultar(query), columns=['fac1', 'fac2' , 'similitud'])
-    x = np.argmax(np.array(data['similitud']))
-    data = data[data.index >= x]  # Nos quedamos con los que tienen mejor similitud
+    #x = np.argmax(np.array(data['similitud']))
+    #data = data[data.index >= x]  # Nos quedamos con los que tienen mejor similitud
     
     # data.to_csv('../files/similarity.csv', ';', index=False, columns=['fac1', 'fac2' ,'similitud'])
     return data
@@ -124,7 +126,7 @@ print(data)
 clientes = sum(getClientes().values.tolist(), [])
 familias = sum(getFamilias().values.tolist(), [])
 #2# - Formamos Matriz")        
-dfObj = pd.DataFrame(columns=familias, index=clientes)
+dfObj = pd.DataFrame(columns=familias, index=clientes) #Usamos el numero de clientes(filas) y el numero de familias(columnas) para formar la matriz
 
 print(dfObj)
 #3# - Recogemos getFacturasFamilia     

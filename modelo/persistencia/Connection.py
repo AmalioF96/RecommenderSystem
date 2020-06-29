@@ -28,7 +28,7 @@ class Connection(object):
 
     def aMasCompradosC(self, id):
         session = self._driver.session()
-        if id is "":
+        if id == "":
             id = "1076"
         result = list(session.run("MATCH p=(c:cliente)-[x:COMPRA]->(f:factura)-[co:CONTIENE]->"
                                   "(a:articulo) WHERE c.id = '" + id + 
@@ -39,7 +39,7 @@ class Connection(object):
 
     def frecuenciaArticulo(self, id_interno):
         session = self._driver.session()
-        if id_interno is "":
+        if id_interno == "":
             id_interno = "78461"
 
         result = list(session.run("MATCH (c:cliente)-[:COMPRA]->(f:factura)-[co:CONTIENE]->" 
