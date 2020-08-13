@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-factura_detalle = pd.read_csv("../files/originales/factura_detalle_julio-2018.csv", sep=',', error_bad_lines=False, index_col= False, dtype='unicode', encoding="latin_1");
+factura_detalle = pd.read_csv("C:/Users/pc1/Documents/UNIVERSIDAD/Tablas MIGUEL/factura_detalle_julio-2018.csv", sep=',', error_bad_lines=False, index_col= False, dtype='unicode', encoding="latin_1");
 
 # Conseguimos eliminar todos los id Factura duplicados, quedandonos unicamente con un id Valido por cada Factura.
 factura_detalle.drop_duplicates(subset="FACTURA_ID", inplace = True);
@@ -12,7 +12,7 @@ mFactura_Id = np.array(factura_detalle["FACTURA_ID"]);
 
 print(mFactura_Id)
 print(len(mFactura_Id))
-facturaCabecera = pd.read_csv("../files/originales/factura_cabecera_julio-2018.csv", sep=',', error_bad_lines=False, index_col = False , dtype='unicode', encoding="latin_1");
+facturaCabecera = pd.read_csv("C:/Users/pc1/Documents/UNIVERSIDAD/Tablas MIGUEL/factura_cabecera_julio-2018.csv", sep=',', error_bad_lines=False, index_col = False , dtype='unicode', encoding="latin_1");
 
 mFacturaCabecera = np.array(facturaCabecera);
 
@@ -33,4 +33,4 @@ while(i < indice):
 
 print("Fin");
 dt = pd.DataFrame(mFacturaCabecera);
-dt.to_csv("../files/procesados/mFacturaCabecera.csv",index = False);
+dt.to_csv("C:/Users/pc1/Documents/UNIVERSIDAD/Tablas MIGUEL/mFacturaCabecera.csv",index = False);

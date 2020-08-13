@@ -10,7 +10,7 @@ Created on 14 mar. 2020
 '''
 import pandas as pd
 import numpy as np
-from modelo.persistencia.Connection import Connection
+from persistencia.Conect import Connection
 
 # Constantes
 URL = 'bolt://localhost:11005'
@@ -61,10 +61,10 @@ for indexI,i in enumerate(cliXfam['cliente']):
     x = cliXfam.loc[indexI, 'cliente']
     y = cliXfam.loc[indexI, 'familia']
     z = cliXfam.loc[indexI, 'similitud']
-    dfObj._set_value(x, y, z)
+    dfObj._set_value(x, y, z )
 
 
 #5# - Guardamos en el csv
 print(dfObj)
-dfObj.to_csv( "../files/similarityMatrix/dataGastoClienteFamilia.csv", index=True)
+dfObj.to_csv( "dataGastoClienteFamilia.csv", index=True)
 myConect.close()

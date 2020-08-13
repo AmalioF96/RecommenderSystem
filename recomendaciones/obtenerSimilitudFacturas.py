@@ -5,7 +5,7 @@ Created on 14 mar. 2020
 '''
 import pandas as pd
 import numpy as np
-from modelo.persistencia.Connection import Connection
+from persistencia.Conect import Connection
 # Constantes
 URL = 'bolt://localhost:11005'
 USER = 'neo4j'
@@ -139,5 +139,5 @@ for indexI,i in enumerate(cliXfam['cliente']):
 
 #5# - Guardamos en el csv
 #print(dfObj)
-dfObj.to_csv( "../files/similarityMatrix/dataClienteFamilia.csv", index=True)
+dfObj.to_csv( "dataClienteFamilia2.csv", index=True)
 myConect.close()

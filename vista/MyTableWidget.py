@@ -2,7 +2,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTabWidget, QPushButton, QTableWidget, QLabel, QLineEdit, QGridLayout, \
     QHBoxLayout, QTableWidgetItem
 
-from controlador.ControladorApp import ControladorApp
+from Controlador.ControladorApp import ControladorApp
 
 
 class MyTableWidget(QWidget):
