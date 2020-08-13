@@ -9,7 +9,6 @@ from modelo.persistencia.Connection import Connection
 
 import datetime
 
-
 # Constantes
 URL = 'bolt://localhost:11005'
 USER = 'neo4j'
