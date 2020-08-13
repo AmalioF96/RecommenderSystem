@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # Tratamiento de datos sobre Articulos
-articulos = pd.read_csv("../files/originales/articulos.csv", sep=',', error_bad_lines=False, index_col = False , dtype='unicode', encoding="latin_1");
+articulos = pd.read_csv("C:/Users/pc1/Documents/UNIVERSIDAD/Tablas MIGUEL/articulos.csv", sep=',', error_bad_lines=False, index_col = False , dtype='unicode', encoding="latin_1");
 
 #articulos = articulos.drop(['Unnamed: 38', 'Unnamed: 39', 'Unnamed: 40', 'Unnamed: 41', 'Unnamed: 42', 'Unnamed: 43', 'Unnamed: 44', 'Unnamed: 45', 'Unnamed: 46', 'Unnamed: 47', 'Unnamed: 48'],axis = 1);
 articulos.drop_duplicates(subset="id", inplace = True);
@@ -15,7 +15,7 @@ mIndicesArticulos = np.array(articulos["id"]);
 print('2255' in mIndicesArticulos);
 # Tratamiento de datos sobre Factura Detalle
 
-factura_detalle = pd.read_csv("../files/originales/factura_detalle_julio-2018.csv", sep=',', error_bad_lines=False, index_col= False, dtype='unicode', encoding="latin_1");
+factura_detalle = pd.read_csv("C:/Users/pc1/Documents/UNIVERSIDAD/Tablas MIGUEL/factura_detalle_julio-2018.csv", sep=',', error_bad_lines=False, index_col= False, dtype='unicode', encoding="latin_1");
 
 mFacturaDetalle = np.array(factura_detalle);
 mFacturaDetalleDef = np.array([]);
@@ -34,8 +34,8 @@ for i in range(len(mFacturaDetalle)):
 
 print("Fin");
 dt = pd.DataFrame(mIndicesArticulos);
-dt.to_csv("../files/procesados/mIndicesArticulos3.csv",index = False);
+dt.to_csv("C:/Users/pc1/Documents/UNIVERSIDAD/Tablas MIGUEL/mIndicesArticulos3.csv",index = False);
 
 df = pd.DataFrame(mFacturaDetalle);
-df.to_csv("../files/procesados/mFacturaDetalle3.csv",index = False);
+df.to_csv("C:/Users/pc1/Documents/UNIVERSIDAD/Tablas MIGUEL/mFacturaDetalle3.csv",index = False);
 
