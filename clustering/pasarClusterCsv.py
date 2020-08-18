@@ -4,12 +4,8 @@ Created on 13 ago. 2020
 @author: Amalio
 '''
 import pandas as pd
-import numpy as np
 from modelo.persistencia.Connection import Connection
 
-from collections import OrderedDict
-import operator
-from dataclasses import replace
 from math import sqrt
 
 # Constantes
@@ -42,34 +38,67 @@ nfilas,ncolumnas=dfCluster.shape
 print("LEIDO")
 tagClientes = dfCluster.index.values.tolist()
 dfObj = pd.DataFrame()
-blacklist=[]
 
+
+matrix=[]
+blacklist=[]
+print(dfObj)
+
+print(nfilas)
+
+'''
+RECORREMOS TODAS LAS FILAS PARA SACAR TODOS LOS CLIENTES
+'''
 for x in range(0, nfilas):
     clienteA=dfCluster.iloc[x].tolist()
     tagA=tagClientes[x]
+    
     for z in range(x, nfilas):
+        '''
+        RECORREMOS TODOS LOS CLIENTES DESDE X HASTA EL FINAL
+        '''
         clienteB=dfCluster.iloc[z].tolist()
         tagB=tagClientes[z]
+        '''
+        Si el cliente z no ha sido ya mirado:
+        '''
         if tagB not in blacklist:
             distanciaEuclidea=0
             strDisEu=""
+            '''
+            Calculamos la distancia euclidea entre los articulos que han comprado en comun el cliente X y el cliente Z
+            '''
             for y in range(0,ncolumnas):
                 if clienteA[y]>0:
                     distanciaEuclidea=(clienteA[y]-clienteB[y])**2
                   
             distanciaEuclidea=sqrt(distanciaEuclidea)
+            
+            ''' 
+            Guardamos la distancia en una matriz tipo 
+            
+            Cliente 1    Cliente 2    Distancia
+              
+              Fran        Miguel        0.7
+              Fran        Amalio        0.5
+              Miguel      Amalio        0.6
+            
+            '''
             if(tagA!=tagB):
-                dfObj.iloc[x][z]=distanciaEuclidea
+                matrix.append([tagA,tagB,distanciaEuclidea])
             
             
             #print(strDisEu[0:-3])    
             #print("Del cliente ",tagA, " al cliente ",tagB," hay una distancia de: ",distanciaEuclidea)    
             #print()
     blacklist.append(tagA)
-    
+    print("fila:",x)
 
 
-dfObj.to_csv("../files/procesados/clusterToCsv",index = ['cliente1','cliente2','peso']);
+dfObj=pd.DataFrame(matrix)
+print(dfObj)
+
+dfObj.to_csv("../files/procesados/similaridadEntreClienteCluster5.csv",index = False ,header = ['cliente1','cliente2','peso']);
 
 
 

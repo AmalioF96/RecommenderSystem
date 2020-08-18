@@ -11,7 +11,7 @@ class Connection(object):
         self._driver.close()
 
     def consultar(self, query):
-        print("Ejecutamos la consulta")  # obtenemos la sesion y ejecutamos la consulta
+        #print("Ejecutamos la consulta")  # obtenemos la sesion y ejecutamos la consulta
         session = self._driver.session()
         result = list(session.run(query))
        
