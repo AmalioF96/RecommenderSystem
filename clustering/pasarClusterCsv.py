@@ -70,7 +70,7 @@ for x in range(0, nfilas):
             '''
             for y in range(0,ncolumnas):
                 if clienteA[y]>0:
-                    distanciaEuclidea=(clienteA[y]-clienteB[y])**2
+                    distanciaEuclidea=distanciaEuclidea+(clienteA[y]-clienteB[y])**2
                   
             distanciaEuclidea=sqrt(distanciaEuclidea)
             

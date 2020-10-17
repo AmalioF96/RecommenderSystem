@@ -43,8 +43,8 @@ for i in range(len(listaClientes)):
     for j in range(len(listaArticulos)):
         c,a,m=str(listaClientes[i]), str(listaArticulos[j]), str(dfCluster.iloc[i][j])
         matrixImportanciaArticulo.append([c,a,m])
-        
-    print("i:",i)
+    if i%100==0:    
+        print("i:",i)
         
 dfObj=pd.DataFrame(matrixImportanciaArticulo)
 dfObj.to_csv("../files/procesados/medidaEntreClienteArticuloCluster5.csv",index = False ,header = ['cliente','articulo','peso']);

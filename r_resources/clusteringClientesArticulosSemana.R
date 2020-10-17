@@ -20,8 +20,8 @@ library(dplyr)
 library(corrplot)   #Para pintar matriz de correlacion
 
 #Leemos los datos
-dataClienteArticuloSemana <- read.csv("../files/similarityMatrix/dataClienteArticuloSimple.csv", row.names=1, na.strings="0")
-
+dataClienteArticuloSemana <- read.csv("../files/similarityMatrix/dataClienteArticuloSimple.csv", row.names=1, na.strings="0",check.names=FALSE)
+#a1,a2,a3,a4,a5
 #Copiamos los datos
 clienteCompraPrep=dataClienteArticuloSemana[,]
 #Summary
@@ -64,7 +64,7 @@ fviz_cluster(clusters.km, data = clienteCompraPrep, palette = "jco", ggtheme = t
 ##### Sacar CSV con los id de usuarios por cluster #####
 
 for (i in 1:numCluster) {
-  nombreFile=paste(paste("../files/clusters/CPSclus_Scale_06Agosto_",sep="",i),sep="",".csv")
+  nombreFile=paste(paste("../files/clusters/CPSclus_Scale_03Octubre_",sep="",i),sep="",".csv")
   write.csv(clienteCompraPrep[clusters.km$cluster == i,], file=nombreFile)
 }
 #####   Matrices de correlacion   #####
