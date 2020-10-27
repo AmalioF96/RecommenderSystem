@@ -23,7 +23,7 @@ Donde 0 representa que un cliente i no ha comprado ningun articulo de una famili
 '''
 import pandas as pd
 import numpy as np
-from modelo.persistencia.Connection import Connection
+from modelo.persistencia.bbdd.Connection import Connection as myConect
 from modelo.persistencia.ArticuloDAO import ArticuloDAO
 from modelo.persistencia.ClienteDAO import ClienteDAO
 
