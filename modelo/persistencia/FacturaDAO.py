@@ -3,10 +3,11 @@ Created on 16 oct. 2020
 
 @author: Amalio
 '''
+
+from modelo.persistencia.bbdd.Connection import Connection as myConect
+
 import pandas as pd
 import numpy as np
-from modelo.persistencia.Connection import Connection
-
 import datetime
 
 
@@ -20,4 +21,4 @@ class FacturaDAO(object):
         '''
         Constructor
         '''
-        self.myConect=conect
+        myConect=conect

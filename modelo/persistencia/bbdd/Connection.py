@@ -1,18 +1,31 @@
 from neo4j import GraphDatabase, basic_auth
 
 
-class Connection(object):
 
+class Connection(object):
+    __URL = 'bolt://localhost:11005'
+    __USER = 'neo4j'
+    __PASSWORD = '123'
+    __Conexion=None
+    
     def __init__(self, uri, user, password):
-        self._driver = GraphDatabase.driver(uri, auth=basic_auth(user, password))
+        self._driver 
         print("Creamos la conexion")
 
     def close(self):
         self._driver.close()
 
-    def consultar(self, query):
+    @classmethod
+    def getInstance(cls):
+        if cls.__Conexion == None:
+            cls.__Conexion = GraphDatabase.driver(cls.__URL, auth=basic_auth(cls.__USER, cls.__PASSWORD))
+        
+        return cls.__Conexion
+    @classmethod        
+    def consultar(cls, query):
         #print("Ejecutamos la consulta")  # obtenemos la sesion y ejecutamos la consulta
-        session = self._driver.session()
+        
+        session = cls.getInstance().session()
         result = list(session.run(query))
        
         return result;
