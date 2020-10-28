@@ -4,22 +4,21 @@ Created on 16 oct. 2020
 @author: Amalio
 '''
 
-from modelo.persistencia.Connection import Connection
-from recomendaciones import ClientesFamiliaPorSemana as cfs
 
+from recomendaciones import ClientesFamiliaPorSemana as cfs
+from modelo.utils import constantes
 import pandas as pd
 import numpy as np
 
 # Constantes
-URL = 'bolt://localhost:11005'
-USER = 'neo4j'
-PASSWORD = '123'
-myConect = Connection(URL, USER, PASSWORD)
 
 
-def extraerDatosClientes(fecha="01-07-2018"):
-    dfObj = cfs.prepareDataToCluster(myConect)
-    dfObj.to_csv("./files/similarityMatrix/dataClienteFamiliaSimple.csv", index=True)
+
+def extraerDatosClientes(fechaStart=constantes.MIN_DATE,fechaEnd=constantes.MAX_DATE):
+    
+    dfObj = cfs.prepareDataToCluster(fechaStart,fechaEnd)
+    
+    dfObj.to_csv("./files/similarityMatrix/28Octubre/dataClienteFamiliaSimple.csv", index=True)
 
     return
 
@@ -32,4 +31,4 @@ if __name__ == '__main__':
     
     extraerDatosClientes()
 
-myConect.close()
+
