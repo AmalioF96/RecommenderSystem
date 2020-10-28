@@ -5,17 +5,15 @@ Created on 4 mar. 2020
 '''
 import pandas as pd
 import numpy as np
-from modelo.persistencia.Connection import Connection
 
 from collections import OrderedDict
 import operator
 from dataclasses import replace
+from modelo.persistencia.ClienteDAO import ClienteDAO
+from modelo.persistencia.ArticuloDAO import ArticuloDAO
+from modelo.persistencia.ComprasDAO import ComprasDAO
 
-# Constantes
-URL = 'bolt://localhost:11005'
-USER = 'neo4j'
-PASSWORD = '123'
-myConect = Connection(URL, USER, PASSWORD)
+#Constantes
 RUTA_FILES="D:/Workspaces/R-workspace/ClusteringR/ClustersGasto/"
 
 def clientesPorCluster(file):
@@ -27,23 +25,23 @@ def clientesPorCluster(file):
 
 
 def gastoMedioDeCluster(listaClientes):
+    cliDAO=ClienteDAO()
     '''En base a una lista de clientes obtenemos su gasto medio, es decir, el gasto medio de un cluster'''
-    query = "MATCH (c:cliente)-[:COMPRA]->(f:factura)-[:CONTIENE]->(a:articulo) where toInt(c.id) IN " + listaClientes + " return sum(toFloat(f.total))/count(f) as gastoMedio"
-    data = pd.DataFrame(myConect.consultar(query), columns=['gastoMedio'])
+    data = cliDAO.gastoMedio(listaClientes)
     return data
 
     
 def familiasDeUnClusterConMayorGastoMedio(listaClientes):
     '''En base a una lista de clientes que forman un cluster, obtenemos el gasto medio que tienen de cada familia.'''
-    query = "MATCH (c:cliente)-[:COMPRA]->(f:factura)-[r2:CONTIENE]->(a:articulo) where toInt(c.id) IN " + listaClientes + " return a.familia_id as familia, sum(toFloat(replace(r2.cantidad,',','.'))*toFloat(a.precio_con_iva))/count(f) as gastoMedio order by gastoMedio desc Limit 20"
-    data = pd.DataFrame(myConect.consultar(query), columns=['familia', 'gastoMedio'])
+    artDAO=ArticuloDAO()
+    data = artDAO.familiasConMayorGastoMedio(listaClientes)
     return data
 
 
 def obtenerComprasYGasto(listaClientes):
     """Este metodo nos devuelve elnumero de facturas asociadas a una lista de clientes y el gasto que suman"""
-    query = "MATCH (c:cliente)-[:COMPRA]->(f:factura)-[r2:CONTIENE]->(a:articulo) where toInteger(c.id) IN " + listaClientes + " return sum(toFloat(f.total)) as cuantia, count(f) as compras"
-    data = pd.DataFrame(myConect.consultar(query), columns=['cuantia', 'compras'])
+    compDAO=ComprasDAO()
+    data = compDAO.obtenerComprasYGasto(listaClientes)
     return data
 
 
@@ -105,4 +103,4 @@ for lst in lstComprasGasto:
     for j, l in enumerate(lst['cuantia']):
         print(i, "\t", str(l).replace(".", ","), "\t", lst.loc[j, 'compras'])
         
-myConect.close()
+

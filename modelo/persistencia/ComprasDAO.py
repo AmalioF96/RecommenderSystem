@@ -30,4 +30,10 @@ class ComprasDAO(object):
                         order by cliente, articulo".format(listaClientes=[str(c) for c in clientes],min=repr(minDay), max=repr(maxDay))
         print(query)
         data = pd.DataFrame(myConect.consultar(query), columns=['cliente','articulo', 'compras'])
-        return data   
+        return data
+    
+    def obtenerComprasYGasto(self,listaClientes):
+        """Este metodo nos devuelve elnumero de facturas asociadas a una lista de clientes y el gasto que suman"""
+        query = "MATCH (c:cliente)-[:COMPRA]->(f:factura)-[r2:CONTIENE]->(a:articulo) where toInteger(c.id) IN " + listaClientes + " return sum(toFloat(f.total)) as cuantia, count(f) as compras"
+        data = pd.DataFrame(myConect.consultar(query), columns=['cuantia', 'compras'])
+        return data

@@ -39,7 +39,7 @@ class ClienteDAO(object):
     def getComprasPorCliente(self, minDay=1, maxDay=7):
         '''
         '''
-        query = "match (c:cliente)-[r:COMPRA]-(f:factura)-[r2:CONTIENE]-(a:articulo) WHERE c.id<>'1715' AND toInteger(substring(r.fecha,0,2))>={min} AND toInteger(substring(r.fecha,0,2))<={max} return c.id as cliente, a.id_interno as articulo, count(a) as compras order by cliente, articulo".format(min=minDay, max=maxDay)
+        query = "match (c:cliente)-[r:COMPRA]-(f:factura)-[r2:CONTIENE]-(a:articulo) WHERE c.id<>'1715' AND r.fecha >= datetime({min}) AND r.fecha <= datetime({max}) return c.id as cliente, a.id_interno as articulo, count(a) as compras order by cliente, articulo".format(min=minDay, max=maxDay)
         data = pd.DataFrame(myConect.consultar(query), columns=['cliente', 'articulo', 'compras'])
         return data
     
@@ -47,7 +47,7 @@ class ClienteDAO(object):
 
         # El menor dia es 1 y el mayor 31
     
-        query = "match (c:cliente)-[r:COMPRA]-(f:factura) WHERE c.id<>'1715' AND toInteger(substring(r.fecha,0,2))>={min} AND toInteger(substring(r.fecha,0,2))<={max} return DISTINCT(c.id) AS cliente order by cliente".format(min=minDay, max=maxDay)
+        query = "match (c:cliente)-[r:COMPRA]-(f:factura) WHERE c.id<>'1715' AND r.fecha >= datetime({min}) AND r.fecha <= datetime({max}) return DISTINCT(c.id) AS cliente order by cliente".format(min=minDay, max=maxDay)
         
         data = pd.DataFrame(myConect.consultar(query), columns=['cliente'])
         return data
@@ -75,4 +75,7 @@ class ClienteDAO(object):
         
         myConect.consultar(query)
 
-
+    def gastoMedio(self, listaClientes):
+        '''En base a una lista de clientes obtenemos su gasto medio, es decir, el gasto medio de un cluster'''
+        query = "MATCH (c:cliente)-[:COMPRA]->(f:factura)-[:CONTIENE]->(a:articulo) where toInt(c.id) IN " + listaClientes + " return sum(toFloat(f.total))/count(f) as gastoMedio"
+        data = pd.DataFrame(myConect.consultar(query), columns=['gastoMedio'])

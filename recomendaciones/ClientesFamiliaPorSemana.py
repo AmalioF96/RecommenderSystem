@@ -23,22 +23,21 @@ Donde 0 representa que un cliente i no ha comprado ningun articulo de una famili
 '''
 import pandas as pd
 import numpy as np
-from modelo.persistencia.bbdd.Connection import Connection as myConect
+
 from modelo.persistencia.ArticuloDAO import ArticuloDAO
 from modelo.persistencia.ClienteDAO import ClienteDAO
+from modelo.utils import constantes
 
-
-def prepareDataToCluster(myConect):
+def prepareDataToCluster(fechaStart=constantes.MIN_DATE,fechaEnd=constantes.MAX_DATE):
     # Variables
-    clientesDAO = ClienteDAO(myConect)
-    articulosDAO = ArticuloDAO(myConect)
+    clientesDAO = ClienteDAO()
+    articulosDAO = ArticuloDAO()
     
-    minDay = 1;
-    maxDay = 1
+    
     
     # 1# - Recogemos datos  
-    clientesPrimeraSemana = clientesDAO.getClientesPorSemana(minDay, maxDay)
-    familiasPrimeraSemana = articulosDAO.getFamiliasPorSemana(minDay, maxDay)
+    clientesPrimeraSemana = clientesDAO.getClientesPorSemana(constantes.MIN_DATE,constantes.MAX_DATE)
+    familiasPrimeraSemana = articulosDAO.getFamiliasPorSemana(constantes.MIN_DATE,constantes.MAX_DATE)
 
     # 2# - Pasamos los datos a lista
     clientes = sum(clientesPrimeraSemana.values.tolist(), [])
@@ -49,7 +48,7 @@ def prepareDataToCluster(myConect):
     
     # 4# - Obtener el contenido de dfObj
     # clienteXfamilia=clientesDAO.getComprasPorCliente(minDay,maxDay)
-    comprasFamiliaPrimeraSemana = articulosDAO.getComprasFamiliaPorSemana(minDay, maxDay)
+    comprasFamiliaPrimeraSemana = articulosDAO.getComprasFamiliaPorSemana(constantes.MIN_DATE, constantes.MIN_DATE)
     print("\n### comprasPrimeraSemana ###\n", comprasFamiliaPrimeraSemana, "###\n")
     # print("\n### clienteXarticulo ###\n",clienteXfamilia,"###\n")
     
