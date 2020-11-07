@@ -8,7 +8,7 @@ from modelo.persistencia.ComprasDAO import ComprasDAO
 from modelo.persistencia.ClienteDAO import ClienteDAO
 
 import pandas as pd
-from modelo.utils import constantes as CONS
+from modelo.utils import Constantes as CONS
 # Constantes
 
 RUTA_FILES="../files/clusters/clusters17Octubre/"

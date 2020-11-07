@@ -5,7 +5,6 @@ Created on 4 mar. 2020
 '''
 import pandas as pd
 import numpy as np
-from modelo.persistencia.Connection import Connection
 
 #Constantes
 URL = 'bolt://localhost:11005'

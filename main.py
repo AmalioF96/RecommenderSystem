@@ -6,7 +6,7 @@ Created on 16 oct. 2020
 
 
 from recomendaciones import ClientesFamiliaPorSemana as cfs
-from modelo.utils import constantes
+from modelo.utils import Constantes as CONS
 import pandas as pd
 import numpy as np
 
@@ -14,7 +14,7 @@ import numpy as np
 
 
 
-def extraerDatosClientes(fechaStart=constantes.MIN_DATE,fechaEnd=constantes.MAX_DATE):
+def extraerDatosClientes(fechaStart=CONS.MIN_DATE,fechaEnd=CONS.MAX_DATE):
     
     dfObj = cfs.prepareDataToCluster(fechaStart,fechaEnd)
     

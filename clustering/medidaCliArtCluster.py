@@ -5,16 +5,12 @@ Created on 18 ago. 2020
 '''
 
 import pandas as pd
-from modelo.persistencia.Connection import Connection
+from modelo.persistencia.bbdd.Connection import Connection
 
 from math import sqrt
 
-# Constantes
-URL = 'bolt://localhost:11005'
-USER = 'neo4j'
-PASSWORD = '123'
-myConect = Connection(URL, USER, PASSWORD)
-RUTA_FILES="../files/clusters/"
+
+RUTA_FILES="../files/clusters/clustersJulio/"
 
 
 
