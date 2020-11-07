@@ -5,7 +5,7 @@ Created on 16 oct. 2020
 '''
 
 
-from recomendaciones import ClientesFamiliaPorSemana as cfs
+#from recomendaciones import ClientesFamiliaPorSemana as cfs
 from modelo.utils import Constantes as CONS
 import pandas as pd
 import numpy as np
@@ -16,9 +16,9 @@ import numpy as np
 
 def extraerDatosClientes(fechaStart=CONS.MIN_DATE,fechaEnd=CONS.MAX_DATE):
     
-    dfObj = cfs.prepareDataToCluster(fechaStart,fechaEnd)
+  #  dfObj = cfs.prepareDataToCluster(fechaStart,fechaEnd)
     
-    dfObj.to_csv("./files/similarityMatrix/28Octubre/dataClienteFamiliaSimple.csv", index=True)
+   # dfObj.to_csv("./files/similarityMatrix/28Octubre/dataClienteFamiliaSimple.csv", index=True)
 
     return
 
@@ -29,6 +29,6 @@ if __name__ == '__main__':
     print("2. Leer los clusters y transformarlos a un formato correcto para Neo4j.")
     x = input("Introduzca la opcion: ")
     
-    extraerDatosClientes()
+    #extraerDatosClientes()
 
 

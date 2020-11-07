@@ -26,9 +26,9 @@ import numpy as np
 
 from modelo.persistencia.ArticuloDAO import ArticuloDAO
 from modelo.persistencia.ClienteDAO import ClienteDAO
-from modelo.utils import constantes
+from modelo.utils import Constantes
 
-def prepareDataToCluster(fechaStart=constantes.MIN_DATE,fechaEnd=constantes.MAX_DATE):
+def prepareDataToCluster(fechaStart=Constantes.MIN_DATE,fechaEnd=Constantes.MAX_DATE):
     # Variables
     clientesDAO = ClienteDAO()
     articulosDAO = ArticuloDAO()
@@ -36,8 +36,8 @@ def prepareDataToCluster(fechaStart=constantes.MIN_DATE,fechaEnd=constantes.MAX_
     
     
     # 1# - Recogemos datos  
-    clientesPrimeraSemana = clientesDAO.getClientesPorSemana(constantes.MIN_DATE,constantes.MAX_DATE)
-    familiasPrimeraSemana = articulosDAO.getFamiliasPorSemana(constantes.MIN_DATE,constantes.MAX_DATE)
+    clientesPrimeraSemana = clientesDAO.getClientesPorSemana(Constantes.MIN_DATE,Constantes.MAX_DATE)
+    familiasPrimeraSemana = articulosDAO.getFamiliasPorSemana(Constantes.MIN_DATE,Constantes.MAX_DATE)
 
     # 2# - Pasamos los datos a lista
     clientes = sum(clientesPrimeraSemana.values.tolist(), [])
@@ -48,7 +48,7 @@ def prepareDataToCluster(fechaStart=constantes.MIN_DATE,fechaEnd=constantes.MAX_
     
     # 4# - Obtener el contenido de dfObj
     # clienteXfamilia=clientesDAO.getComprasPorCliente(minDay,maxDay)
-    comprasFamiliaPrimeraSemana = articulosDAO.getComprasFamiliaPorSemana(constantes.MIN_DATE, constantes.MIN_DATE)
+    comprasFamiliaPrimeraSemana = articulosDAO.getComprasFamiliaPorSemana(Constantes.MIN_DATE, Constantes.MIN_DATE)
     print("\n### comprasPrimeraSemana ###\n", comprasFamiliaPrimeraSemana, "###\n")
     # print("\n### clienteXarticulo ###\n",clienteXfamilia,"###\n")
     
