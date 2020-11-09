@@ -5,8 +5,8 @@ Created on 27 oct. 2020
 '''
 
 #Fechas
-MIN_DATE=repr("2018-07-01")
-MAX_DATE=repr("2018-07-07")
+MIN_DATE='2018-07-01'
+MAX_DATE='2018-07-07'
 
 
 ########### Rutas Ficheros ###########
