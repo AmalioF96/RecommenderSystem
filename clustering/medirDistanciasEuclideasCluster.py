@@ -39,9 +39,19 @@ def medirDistanciaEntreClientes(fileCluster):
     
 if __name__ == '__main__':
     #calcularDistanciaEuclideaClientes("ClientesFamilias_clus_1.csv")
-    medirDistanciaEntreClientes("ClientesFamilias_clus_1.csv")
+    porcentaje=0;
+    numFiles=5;
+    for i in range(1,numFiles+1):
+        file="ClientesFamilias_clus_"+str(i)+".csv"
+        
+        print("Analizando:",file,"\tCompletado al: ",porcentaje,"%\n")
+        
+        medirDistanciaEntreClientes(file)
+        
+        porcentaje=porcentaje+100/numFiles;
 
-
+    
+    print("Completado al: ",porcentaje,"%\n")
 
 
 
