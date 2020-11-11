@@ -4,8 +4,10 @@ Created on 9 nov. 2020
 @author: Amalio
 '''
 
-import flaskfrom . import ApiController
+import flask
+
 from flask import request, jsonify
+from api.appflask.ApiController import ApiController
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -18,8 +20,8 @@ def api_home():
 @app.route('/recommend', methods=['GET'])
 def api_recommend():
     if 'id' in request.args:
-        id = int(request.args['id'])
-        out= jsonify(controller.recommend(id))
+        idCliente = str(request.args['id'])
+        out= jsonify(controller.recommend(idCliente))
     else:
         out= "Error: No id field provided. Please specify an id."
     
