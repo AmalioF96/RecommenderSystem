@@ -5,7 +5,7 @@ Created on 30 jul. 2020
 '''
 import pandas as pd
 import numpy as np
-from modelo.persistencia.Connection import Connection
+
 from modelo.persistencia.ArticuloDAO import ArticuloDAO
 from modelo.persistencia.ClienteDAO import ClienteDAO
 
