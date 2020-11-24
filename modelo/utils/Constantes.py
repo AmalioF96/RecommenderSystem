@@ -10,8 +10,8 @@ MAX_DATE='2018-07-07'
 
 
 ########### Rutas Ficheros ###########
-    # Clusters #
-
+# Clusters #
+CLUSTER_DIRECTORY = "files/clusters/clusters17Octubre"
 #Conexion NEO4J
 '''De momento estas se encuentran en uso en Connection, ya que es un singleton y siempre debe haber una instancia de la clase'''
 URL = 'bolt://localhost:11005'
